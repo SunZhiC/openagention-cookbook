@@ -166,6 +166,48 @@ describe("AutomationRunner", () => {
     expect(errors.length).toBeGreaterThanOrEqual(1);
   });
 
+  it("non-timeout runtime error sets status to failed", async () => {
+    const loader = new SkillLoader();
+    loader.register(testingSkill);
+
+    const failingProvider: import("@openagention/core").ChatProvider = {
+      async chat() {
+        throw new Error("Connection refused");
+      },
+    };
+
+    const runner = new AutomationRunner({
+      loader,
+      provider: failingProvider,
+      timeout: 30_000,
+    });
+
+    const automation: Automation = {
+      id: "auto_fail",
+      name: "Failing Automation",
+      trigger: "code_pushed",
+      skillId: testingSkill.id,
+      status: "idle",
+    };
+    runner.register(automation);
+
+    const result = await runner.trigger(automation.id);
+    expect(result.status).toBe("failed");
+    expect(runner.getStatus(automation.id)).toBe("failed");
+
+    const errorEvent = result.traceEvents.find((e) => e.type === "error");
+    expect(errorEvent).toBeDefined();
+    expect((errorEvent!.data as { code: string }).code).toBe(
+      "AUTOMATION_ERROR",
+    );
+
+    const stateChanges = result.traceEvents.filter(
+      (e) => e.type === "state_change",
+    );
+    expect(stateChanges).toHaveLength(2);
+    expect((stateChanges[1]!.data as { to: string }).to).toBe("failed");
+  });
+
   it("timeout updates status and emits timeout trace events", async () => {
     const loader = new SkillLoader();
     loader.register(testingSkill);

@@ -227,6 +227,25 @@ describe("AgentLoop", () => {
     ).rejects.toThrow(/MockProvider exhausted/);
   });
 
+  it("handles non-Error throw from provider and records string message", async () => {
+    const throwProvider: import("@openagention/core").ChatProvider = {
+      async chat() {
+        throw "raw string error from provider";
+      },
+    };
+
+    const loop = new AgentLoop({
+      maxTurns: 5,
+      timeout: 5000,
+      tools: makeTools(),
+      provider: throwProvider,
+    });
+
+    await expect(loop.run([{ role: "user", content: "Hello" }])).rejects.toBe(
+      "raw string error from provider",
+    );
+  });
+
   it("records error trace event when tool dispatch fails", async () => {
     const tools = new ToolRegistry();
     // Register nothing — any tool call will fail

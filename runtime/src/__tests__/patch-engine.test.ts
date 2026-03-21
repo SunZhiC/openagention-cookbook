@@ -169,6 +169,30 @@ line 5`);
     });
   });
 
+  describe("edge cases", () => {
+    it("skips blank lines between file headers and first hunk header", () => {
+      // Blank line after +++ before @@ — exercises the blank-line-skip in the outer hunk loop
+      const diff = `--- a/file.ts
++++ b/file.ts
+
+@@ -1,2 +1,2 @@
+-old
++new`;
+      const parsed = parseDiff(diff);
+      expect(parsed.hunks).toHaveLength(1);
+      expect(parsed.hunks[0]!.lines).toEqual(["-old", "+new"]);
+    });
+
+    it("handles hunk with only additions (no deletions or context)", () => {
+      const diff = `@@ -1,0 +1,2 @@
++line1
++line2`;
+      const parsed = parseDiff(diff);
+      expect(parsed.hunks).toHaveLength(1);
+      expect(parsed.hunks[0]!.lines).toEqual(["+line1", "+line2"]);
+    });
+  });
+
   describe("validate", () => {
     it("returns true for a valid diff", () => {
       expect(validate(VALID_DIFF)).toBe(true);

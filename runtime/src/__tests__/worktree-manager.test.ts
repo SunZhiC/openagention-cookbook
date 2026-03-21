@@ -22,7 +22,10 @@ describe("WorktreeManager", () => {
     manager.create("feature/b", "task_b");
     const list = manager.list();
     expect(list).toHaveLength(2);
-    expect(list.map((w) => w.branch).sort()).toEqual(["feature/a", "feature/b"]);
+    expect(list.map((w) => w.branch).sort()).toEqual([
+      "feature/a",
+      "feature/b",
+    ]);
   });
 
   it("finds a worktree by taskId", () => {
@@ -76,5 +79,23 @@ describe("WorktreeManager", () => {
     expect(() => manager.create("feature/dup2", "task_dup")).toThrow(
       "already has an active worktree",
     );
+  });
+
+  it("markMerged throws for non-existent worktree", () => {
+    expect(() => manager.markMerged("wt_999")).toThrow("not found");
+  });
+
+  it("markAbandoned throws for non-existent worktree", () => {
+    expect(() => manager.markAbandoned("wt_999")).toThrow("not found");
+  });
+
+  it("allows creating a new worktree for a task after the previous is merged", () => {
+    const wt1 = manager.create("feature/first", "task_reuse");
+    manager.markMerged(wt1.id);
+
+    // Merged worktree is no longer "active", so a new one can be created
+    const wt2 = manager.create("feature/second", "task_reuse");
+    expect(wt2.status).toBe("active");
+    expect(wt2.id).not.toBe(wt1.id);
   });
 });

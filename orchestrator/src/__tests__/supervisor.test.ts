@@ -242,6 +242,34 @@ describe("WorkerAgent", () => {
     expect(stateChanges.length).toBeGreaterThanOrEqual(2);
   });
 
+  it("handles non-Error throw and records string message", async () => {
+    const tools = createTools();
+    // Provider that throws a string (not an Error instance)
+    const throwProvider: import("@openagention/core").ChatProvider = {
+      async chat() {
+        throw "raw string error";
+      },
+    };
+    const worker = new WorkerAgent({ provider: throwProvider, tools });
+
+    const task = {
+      id: "t3",
+      name: "non-error-throw",
+      goal: "this throws a string",
+      state: "pending" as const,
+      traceEvents: [],
+    };
+
+    const result = await worker.execute(task);
+    expect(task.state).toBe("failed");
+
+    const errorEvent = result.traceEvents.find((e) => e.type === "error");
+    expect(errorEvent).toBeDefined();
+    expect((errorEvent!.data as { message: string }).message).toBe(
+      "raw string error",
+    );
+  });
+
   it("transitions task to failed on error", async () => {
     const tools = createTools();
     // Empty responses → MockProvider throws

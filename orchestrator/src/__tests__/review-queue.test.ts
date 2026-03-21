@@ -149,6 +149,34 @@ describe("ReviewQueue", () => {
     );
   });
 
+  it("approve throws for non-existent item", () => {
+    const queue = new ReviewQueue();
+    expect(() => queue.approve("nonexistent", "alice")).toThrow(
+      '"nonexistent" not found',
+    );
+  });
+
+  it("reject throws for non-existent item", () => {
+    const queue = new ReviewQueue();
+    expect(() => queue.reject("nonexistent", "bob", "bad")).toThrow(
+      '"nonexistent" not found',
+    );
+  });
+
+  it("revise throws for non-existent item", () => {
+    const queue = new ReviewQueue();
+    expect(() => queue.revise("nonexistent", "feedback")).toThrow(
+      '"nonexistent" not found',
+    );
+  });
+
+  it("resubmit throws for non-existent item", () => {
+    const queue = new ReviewQueue();
+    expect(() => queue.resubmit("nonexistent")).toThrow(
+      '"nonexistent" not found',
+    );
+  });
+
   it("enqueue rejects non-pending items", () => {
     const queue = new ReviewQueue();
     const item: ReviewItem = {

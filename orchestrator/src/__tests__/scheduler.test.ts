@@ -178,4 +178,87 @@ describe("Scheduler", () => {
     const scheduler = new Scheduler([], new Map());
     expect(() => scheduler.markFailed("nonexistent")).toThrow("not found");
   });
+
+  it("markRunning transitions task to running and records trace", () => {
+    const tasks = [makeTask("a")];
+    const deps = new Map<string, string[]>();
+    const scheduler = new Scheduler(tasks, deps);
+
+    scheduler.markRunning("a");
+    expect(scheduler.getTask("a")!.state).toBe("running");
+
+    const events = scheduler.getTraceEvents();
+    const runningEvent = events.find(
+      (e) =>
+        e.type === "state_change" &&
+        (e.data as { to: string }).to === "running",
+    );
+    expect(runningEvent).toBeDefined();
+  });
+
+  it("markRunning throws for unknown task", () => {
+    const scheduler = new Scheduler([], new Map());
+    expect(() => scheduler.markRunning("nonexistent")).toThrow("not found");
+  });
+
+  it("isStalled returns false when a task is currently running", () => {
+    const tasks = [makeTask("a"), makeTask("b")];
+    const deps = new Map<string, string[]>([
+      ["a", []],
+      ["b", ["a"]],
+    ]);
+    const scheduler = new Scheduler(tasks, deps);
+
+    scheduler.markRunning("a");
+    // "a" is running, "b" is pending but blocked — not stalled because work is in progress
+    expect(scheduler.isStalled()).toBe(false);
+  });
+
+  it("dependencies on non-existent tasks are skipped in cycle detection", () => {
+    const tasks = [makeTask("a")];
+    const deps = new Map<string, string[]>([["a", ["ghost"]]]);
+    const scheduler = new Scheduler(tasks, deps);
+
+    // Should not throw or report a cycle
+    expect(scheduler.detectCycle()).toBeNull();
+  });
+
+  it("detectCycle returns null for acyclic graph", () => {
+    const tasks = [makeTask("a"), makeTask("b"), makeTask("c")];
+    const deps = new Map<string, string[]>([
+      ["a", []],
+      ["b", ["a"]],
+      ["c", ["b"]],
+    ]);
+    const scheduler = new Scheduler(tasks, deps);
+
+    expect(scheduler.detectCycle()).toBeNull();
+  });
+
+  it("detectCycle handles diamond DAG (shared dependency visited twice)", () => {
+    // Diamond: a → [b, c] → d
+    // When processing "d", "a" has already been fully visited — exercises the visited.has() check
+    const tasks = [makeTask("a"), makeTask("b"), makeTask("c"), makeTask("d")];
+    const deps = new Map<string, string[]>([
+      ["a", []],
+      ["b", ["a"]],
+      ["c", ["a"]],
+      ["d", ["b", "c"]],
+    ]);
+    const scheduler = new Scheduler(tasks, deps);
+
+    expect(scheduler.detectCycle()).toBeNull();
+  });
+
+  it("getExecutionOrder returns empty array when all tasks are in a cycle", () => {
+    const tasks = [makeTask("a"), makeTask("b")];
+    const deps = new Map<string, string[]>([
+      ["a", ["b"]],
+      ["b", ["a"]],
+    ]);
+    const scheduler = new Scheduler(tasks, deps);
+
+    // All tasks depend on each other, none can be scheduled
+    expect(scheduler.getExecutionOrder()).toEqual([]);
+  });
 });
