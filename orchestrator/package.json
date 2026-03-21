@@ -1,0 +1,41 @@
+{
+  "name": "@openagention/orchestrator",
+  "version": "0.1.0",
+  "description": "Supervisor-worker orchestration, scheduling, and review queue",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SunZhiC/openagention"
+  },
+  "keywords": [
+    "orchestration",
+    "supervisor-worker",
+    "scheduler",
+    "review-queue"
+  ],
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@openagention/core": "workspace:*",
+    "@openagention/runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "vitest": "^3.2.4"
+  }
+}

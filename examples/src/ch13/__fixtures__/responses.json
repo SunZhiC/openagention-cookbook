@@ -1,0 +1,48 @@
+[
+  {
+    "role": "assistant",
+    "content": "I'll review the code using the injected skill tools.",
+    "tool_calls": [
+      {
+        "id": "call_1301",
+        "type": "function",
+        "function": {
+          "name": "readFile",
+          "arguments": "{\"path\":\"src/auth.ts\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "Let me analyse the code quality.",
+    "tool_calls": [
+      {
+        "id": "call_1302",
+        "type": "function",
+        "function": {
+          "name": "analyzeCode",
+          "arguments": "{\"code\":\"export function login(user: string, pass: string) { return db.check(user, pass); }\",\"language\":\"typescript\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "Found an issue — no input validation. Let me suggest a fix.",
+    "tool_calls": [
+      {
+        "id": "call_1303",
+        "type": "function",
+        "function": {
+          "name": "suggestFix",
+          "arguments": "{\"issue\":\"No input validation on login parameters\",\"code\":\"export function login(user: string, pass: string) { return db.check(user, pass); }\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "Code review complete. Found 1 issue (missing input validation) and suggested a fix with parameter guards."
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "role": "assistant",
+    "content": "Connected to filesystem and github MCP servers, registered three remote tools, and dispatched them through the local ToolRegistry."
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "name": "@openagention/examples",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ch1": "tsx src/ch01/index.ts",
+    "ch2": "tsx src/ch02/index.ts",
+    "ch3": "tsx src/ch03/index.ts",
+    "ch4": "tsx src/ch04/index.ts",
+    "ch5": "tsx src/ch05/index.ts",
+    "ch6": "tsx src/ch06/index.ts",
+    "ch7": "tsx src/ch07/index.ts",
+    "ch8": "tsx src/ch08/index.ts",
+    "ch9": "tsx src/ch09/index.ts",
+    "ch10": "tsx src/ch10/index.ts",
+    "ch11": "tsx src/ch11/index.ts",
+    "ch12": "tsx src/ch12/index.ts",
+    "ch13": "tsx src/ch13/index.ts",
+    "ch14": "tsx src/ch14/index.ts",
+    "ch15": "tsx src/ch15/index.ts",
+    "ch16": "tsx src/ch16/index.ts",
+    "ch17": "tsx src/ch17/index.ts",
+    "ch18": "tsx src/ch18/index.ts",
+    "ch19": "tsx src/ch19/index.ts",
+    "ch20": "tsx src/ch20/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:smoke": "vitest run src/__tests__/ch09-ch12-smoke.test.ts"
+  },
+  "dependencies": {
+    "@openagention/core": "workspace:*",
+    "@openagention/orchestrator": "workspace:*",
+    "@openagention/runtime": "workspace:*",
+    "@openagention/skills": "workspace:*",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.2"
+  }
+}

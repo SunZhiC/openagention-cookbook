@@ -1,0 +1,48 @@
+[
+  {
+    "role": "assistant",
+    "content": "I'll run the test suite for you.",
+    "tool_calls": [
+      {
+        "id": "call_060",
+        "type": "function",
+        "function": {
+          "name": "shell",
+          "arguments": "{\"command\":\"npm test\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "The shell command was denied by the security policy. Let me take a safer approach and examine the project configuration instead.",
+    "tool_calls": [
+      {
+        "id": "call_061",
+        "type": "function",
+        "function": {
+          "name": "readFile",
+          "arguments": "{\"path\":\"package.json\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "I can see the project uses vitest for testing. Let me also check the source code.",
+    "tool_calls": [
+      {
+        "id": "call_062",
+        "type": "function",
+        "function": {
+          "name": "readFile",
+          "arguments": "{\"path\":\"src/app.ts\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "I wasn't able to run the tests directly because the shell command was blocked by the approval policy.\n\nHere's what I found by reading the config:\n- **Test runner**: vitest (configured in package.json)\n- **Source code**: `src/app.ts` exports a `start()` function\n\nTo run tests, you would execute `npm test` manually. This demo shows the policy gate and restricted tool-access model in action; it is not presenting a security-grade sandbox."
+  }
+]

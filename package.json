@@ -1,0 +1,39 @@
+{
+  "name": "openagention-cookbook",
+  "private": true,
+  "packageManager": "pnpm@10.11.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "ch1": "pnpm --filter @openagention/examples run ch1",
+    "ch2": "pnpm --filter @openagention/examples run ch2",
+    "ch3": "pnpm --filter @openagention/examples run ch3",
+    "ch4": "pnpm --filter @openagention/examples run ch4",
+    "ch5": "pnpm --filter @openagention/examples run ch5",
+    "ch6": "pnpm --filter @openagention/examples run ch6",
+    "ch7": "pnpm --filter @openagention/examples run ch7",
+    "ch8": "pnpm --filter @openagention/examples run ch8",
+    "ch9": "pnpm --filter @openagention/examples run ch9",
+    "ch10": "pnpm --filter @openagention/examples run ch10",
+    "ch11": "pnpm --filter @openagention/examples run ch11",
+    "ch12": "pnpm --filter @openagention/examples run ch12",
+    "ch13": "pnpm --filter @openagention/examples run ch13",
+    "ch14": "pnpm --filter @openagention/examples run ch14",
+    "ch15": "pnpm --filter @openagention/examples run ch15",
+    "ch16": "pnpm --filter @openagention/examples run ch16",
+    "ch17": "pnpm --filter @openagention/examples run ch17",
+    "ch18": "pnpm --filter @openagention/examples run ch18",
+    "ch19": "pnpm --filter @openagention/examples run ch19",
+    "ch20": "pnpm --filter @openagention/examples run ch20",
+    "typecheck": "pnpm -r typecheck",
+    "test": "vitest run --passWithNoTests",
+    "test:smoke": "pnpm --filter @openagention/examples run test:smoke"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.1.1"
+  }
+}

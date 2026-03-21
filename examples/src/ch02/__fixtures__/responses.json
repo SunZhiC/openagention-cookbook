@@ -1,0 +1,48 @@
+[
+  {
+    "role": "assistant",
+    "content": "Let me explore the project structure first.",
+    "tool_calls": [
+      {
+        "id": "call_010",
+        "type": "function",
+        "function": {
+          "name": "listFiles",
+          "arguments": "{\"directory\":\"src\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "I see two files. Let me read them both.",
+    "tool_calls": [
+      {
+        "id": "call_011",
+        "type": "function",
+        "function": {
+          "name": "readFile",
+          "arguments": "{\"path\":\"src/app.ts\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "Now let me add a helper function to the project.",
+    "tool_calls": [
+      {
+        "id": "call_012",
+        "type": "function",
+        "function": {
+          "name": "writeFile",
+          "arguments": "{\"path\":\"src/helpers.ts\",\"content\":\"export function capitalize(s: string): string {\\n  return s.charAt(0).toUpperCase() + s.slice(1);\\n}\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "Done! I explored the project using `listFiles`, read the source with `readFile`, and created a new helper module with `writeFile`. The new `capitalize` function in `src/helpers.ts` can be imported anywhere in the project."
+  }
+]

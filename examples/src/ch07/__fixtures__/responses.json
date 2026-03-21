@@ -1,0 +1,48 @@
+[
+  {
+    "role": "assistant",
+    "content": "I'll create a simulated worktree record for the login feature.",
+    "tool_calls": [
+      {
+        "id": "call_070",
+        "type": "function",
+        "function": {
+          "name": "createWorktree",
+          "arguments": "{\"branch\":\"feature/login\",\"taskId\":\"task_login_001\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "The simulated worktree record is ready. Let me verify it's in the list and continue the demo.",
+    "tool_calls": [
+      {
+        "id": "call_071",
+        "type": "function",
+        "function": {
+          "name": "listWorktrees",
+          "arguments": "{}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "The simulated worktree is active. I've finished the lifecycle demo and will now mark it as merged.",
+    "tool_calls": [
+      {
+        "id": "call_072",
+        "type": "function",
+        "function": {
+          "name": "completeWorktree",
+          "arguments": "{\"worktreeId\":\"wt_001\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "Done! Here's the simulated worktree lifecycle:\n\n1. **Created** worktree record `wt_001` for branch `feature/login`\n2. **Tracked** the task as active in the in-memory manager\n3. **Merged** — marked the simulated worktree as complete\n\nThis demo shows the lifecycle bookkeeping you would need before wiring in real git worktree commands."
+  }
+]

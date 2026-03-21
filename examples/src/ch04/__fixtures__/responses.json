@@ -1,0 +1,62 @@
+[
+  {
+    "role": "assistant",
+    "content": "Let me start working on the feature. First, I'll read the relevant files.",
+    "tool_calls": [
+      {
+        "id": "call_030",
+        "type": "function",
+        "function": {
+          "name": "readFile",
+          "arguments": "{\"path\":\"src/index.ts\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "I see the file contents. Let me read more files to understand the full context.",
+    "tool_calls": [
+      {
+        "id": "call_031",
+        "type": "function",
+        "function": {
+          "name": "readFile",
+          "arguments": "{\"path\":\"src/types.ts\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "The context is getting large. Let me summarize what I've learned so far and create a checkpoint.",
+    "tool_calls": [
+      {
+        "id": "call_032",
+        "type": "function",
+        "function": {
+          "name": "summarizeContext",
+          "arguments": "{\"summary\":\"Project has an entry point (index.ts) that exports a main function, and a types module (types.ts) defining Config, Options, and Result interfaces. The architecture follows a functional pattern with dependency injection.\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "Context summarized and checkpoint created. Now I can continue with a focused context. Let me implement the feature.",
+    "tool_calls": [
+      {
+        "id": "call_033",
+        "type": "function",
+        "function": {
+          "name": "createCheckpoint",
+          "arguments": "{\"label\":\"post-analysis\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "Checkpoint saved. Here's what happened in this session:\n\n1. **Read files** — examined `src/index.ts` and `src/types.ts`\n2. **Context grew** — accumulated file contents in the conversation\n3. **Summarized** — compressed the context into a concise summary\n4. **Checkpointed** — saved state so we can resume later\n\nThis demonstrates how an agent manages its context window: when the conversation grows too large, it summarizes earlier content and creates a resumable checkpoint. This keeps the agent effective even on long-running tasks."
+  }
+]

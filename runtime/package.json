@@ -1,0 +1,46 @@
+{
+  "name": "@openagention/runtime",
+  "version": "0.1.0",
+  "description": "Agent loop, tool registry, and execution runtime for OpenAgention",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SunZhiC/openagention"
+  },
+  "keywords": [
+    "ai-agent",
+    "agent-loop",
+    "tool-registry",
+    "llm"
+  ],
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@openagention/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "openai": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "openai": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}

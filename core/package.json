@@ -1,0 +1,35 @@
+{
+  "name": "@openagention/core",
+  "version": "0.1.0",
+  "description": "Core types and schemas for OpenAgention multi-agent system",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SunZhiC/openagention"
+  },
+  "keywords": [
+    "ai-agent",
+    "multi-agent",
+    "orchestration",
+    "types"
+  ],
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}

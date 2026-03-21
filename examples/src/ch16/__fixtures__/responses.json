@@ -1,0 +1,6 @@
+[
+  {
+    "role": "assistant",
+    "content": "{\"findings\":[{\"severity\":\"high\",\"filePath\":\"auth.ts\",\"lineNumber\":42,\"description\":\"Missing null check before reading user.email.\",\"suggestedFix\":\"Add a guard before accessing user.email.\"}],\"recommendation\":\"request_changes\"}"
+  }
+]

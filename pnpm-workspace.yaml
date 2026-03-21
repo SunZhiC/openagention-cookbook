@@ -1,0 +1,6 @@
+packages:
+  - "core"
+  - "runtime"
+  - "orchestrator"
+  - "skills"
+  - "examples"

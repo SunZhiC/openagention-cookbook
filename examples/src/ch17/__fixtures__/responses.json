@@ -1,0 +1,10 @@
+[
+  {
+    "role": "assistant",
+    "content": "{\"name\":\"web-api\",\"replicas\":\"three\",\"port\":8080,\"environment\":\"prod\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "{\"name\":\"web-api\",\"replicas\":3,\"port\":8080,\"environment\":\"production\"}"
+  }
+]

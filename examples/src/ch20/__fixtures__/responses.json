@@ -1,0 +1,30 @@
+[
+  {
+    "role": "assistant",
+    "content": "Recovered from timeout. Retrying with increased timeout of 45s."
+  },
+  {
+    "role": "assistant",
+    "content": "Recovered from rate limit. Backed off with exponential delay."
+  },
+  {
+    "role": "assistant",
+    "content": "Recovered from malformed JSON. Extracted valid JSON from response."
+  },
+  {
+    "role": "assistant",
+    "content": "Recovered from empty response. Sent a follow-up prompt."
+  },
+  {
+    "role": "assistant",
+    "content": "Recovered from prompt injection. Input sanitized and retried."
+  },
+  {
+    "role": "assistant",
+    "content": "Recovered from model refusal. Rephrased the request."
+  },
+  {
+    "role": "assistant",
+    "content": "Recovered from checkpoint corruption. Rebuilt from last valid snapshot."
+  }
+]
