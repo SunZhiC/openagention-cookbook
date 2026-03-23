@@ -2,7 +2,7 @@
   "name": "@openagention/runtime",
   "version": "0.1.0",
   "description": "Agent loop, tool registry, and execution runtime for OpenAgention",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/SunZhiC/openagention"

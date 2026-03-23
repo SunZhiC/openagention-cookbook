@@ -2,7 +2,7 @@
   "name": "@openagention/orchestrator",
   "version": "0.1.0",
   "description": "Supervisor-worker orchestration, scheduling, and review queue",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/SunZhiC/openagention"

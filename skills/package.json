@@ -2,7 +2,7 @@
   "name": "@openagention/skills",
   "version": "0.1.0",
   "description": "Skill loading and automation runner for OpenAgention",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/SunZhiC/openagention"

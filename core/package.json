@@ -2,7 +2,7 @@
   "name": "@openagention/core",
   "version": "0.1.0",
   "description": "Core types and schemas for OpenAgention multi-agent system",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/SunZhiC/openagention"
